@@ -1,9 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cookieparser from "cookie-parser";
+import router from "./routes/transaction.js";
 
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended : false}));
+app.use(cookieparser());
+app.use('/', router);
 dotenv.config();
 
 const connectDB = async() => {
@@ -17,6 +23,6 @@ const connectDB = async() => {
 
 connectDB();
 
-app.listen(5000, ()=> {
+app.listen(process.env.PORT, ()=> {
     console.log("The server is running on port :", 5000);
 });

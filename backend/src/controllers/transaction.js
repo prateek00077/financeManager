@@ -1,9 +1,9 @@
-import Transaction from "../models/transaction";
+import Transaction from "../models/transaction.js";
 
 export async function addTransaction( req, res ) {
     const { title, amount, date, category } = req.body;
 
-    if(!title || amount || category ) {
+    if(!title || !amount || !category ) {
         return res.status(400).json({ message : "Provide all fields "});
     }
 
@@ -14,6 +14,7 @@ export async function addTransaction( req, res ) {
         category
     });
 
+    await newTransaction.save();
     return res.status(201).json(
         { message : "transaction created successfully "},
         newTransaction
