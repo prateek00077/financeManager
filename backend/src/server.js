@@ -7,12 +7,13 @@ import cors from "cors";
 
 
 const app = express();
-app.use(cors({ origin: "*" }));
+dotenv.config();
+
+app.use(cors({ origin: process.env.FRONTEND_URI }));
 app.use(express.json());
 app.use(express.urlencoded({ extended : false}));
 app.use(cookieparser());
 app.use('/', router);
-dotenv.config();
 
 const connectDB = async() => {
     try {
