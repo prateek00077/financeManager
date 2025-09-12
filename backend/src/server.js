@@ -3,9 +3,11 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cookieparser from "cookie-parser";
 import router from "./routes/transaction.js";
+import cors from "cors";
 
 
 const app = express();
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended : false}));
 app.use(cookieparser());
