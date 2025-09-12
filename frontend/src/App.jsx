@@ -9,7 +9,7 @@ const App = () => {
 
   const fetchTransactions = () => {
     setLoading(true);
-    fetch("http://localhost:5000/")
+    fetch(`${import.meta.env.VITE_PORT}`)
       .then((res) => res.json())
       .then((data) => {
         setTransactions(data);
@@ -33,7 +33,7 @@ const App = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this transaction?')) return;
     try {
-      await fetch(`http://localhost:5000/${id}/delete`, { method: 'DELETE' });
+      await fetch(`${import.meta.env.VITE_PORT}${id}/delete`, { method: 'DELETE' });
       fetchTransactions();
     } catch (err) {
       alert('Failed to delete transaction');
@@ -56,7 +56,7 @@ const App = () => {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-      await fetch(`http://localhost:5000/${editId}/edit`, {
+      await fetch(`${import.meta.env.VITE_PORT}${editId}/edit`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(editData)

@@ -18,7 +18,7 @@ const Form = ({ onAdd, setShowForm }) => {
     }
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/add", {
+      const res = await fetch(`${import.meta.env.VITE_PORT}add`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, amount, date, category })
